@@ -1,19 +1,20 @@
 class Test
 	constructor: ->
 		@_tasks = []
-		@_interval = null
+		@_timeout = null
 
 	start: ->
-		@_interval = setInterval =>
+		@_timeout = setTimeout =>
 			@_processNextTask()
-		, 1000
+			@start()
+		, @_getNextTimeout()
 
 	stop: ->
-		clearInterval(@_interval)
-		@_interval = null
+		clearTimeout(@_timeout)
+		@_timeout = null
 
 	isRunning: ->
-		!!@_interval
+		!!@_timeout
 
 	getTasks: ->
 		@_tasks
@@ -22,9 +23,13 @@ class Test
 		@_tasks.push task
 
 	_processNextTask: ->
-		nextTask = @_tasks.pop()
+		nextTask = @_tasks.shift()
 		if typeof nextTask.task == 'function'
 			nextTask.task()
-		
+
+	_getNextTimeout: ->
+		nextTask = @_tasks[0]
+		timeout = nextTask.timeout if nextTask
+		timeout || 1000
 
 module.exports = Test

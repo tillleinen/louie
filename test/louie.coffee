@@ -49,7 +49,44 @@ describe 'Louie', ->
             louie.addTask
                 task: ->
                     expect(Date.now()).to.be
-                        .closeTo(timeExpectedAfterFinishing, 100)
+                        .closeTo(timeExpectedAfterFinishing, 50)
                     done()
 
             louie.start()
+
+        it 'should allow custom timeouts per task', (done) ->
+            firstTimeout = 500
+            secondTimeout = 100
+            thirdTimeout = 1000
+
+            timeNow = Date.now()
+            timeExpectedAfterFinishingFirst = timeNow + firstTimeout
+            timeExpectedAfterFinishingSecond = 
+                timeExpectedAfterFinishingFirst + secondTimeout
+            timeExpectedAfterFinishingThird = 
+                timeExpectedAfterFinishingSecond + thirdTimeout
+
+            louie.addTask
+                timeout: firstTimeout
+                task: ->
+                    expect(Date.now()).to.be
+                        .closeTo(timeExpectedAfterFinishingFirst, 50)
+
+            louie.addTask
+                timeout: secondTimeout
+                task: ->
+                    expect(Date.now()).to.be
+                        .closeTo(timeExpectedAfterFinishingSecond, 50)
+
+            louie.addTask
+                timeout: thirdTimeout
+                task: ->
+                    expect(Date.now()).to.be
+                        .closeTo(timeExpectedAfterFinishingThird, 50)
+                    done()
+
+            tasks = louie.getTasks()
+            expect(tasks).to.have.length(3)
+
+            louie.start()
+
