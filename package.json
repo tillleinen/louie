@@ -1,0 +1,26 @@
+{
+  "name": "louie",
+  "version": "0.0.1",
+  "description": "Louie is a timeable infinite loop for executing tasks.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "prepublish": "node_modules/coffee-script/bin/coffee -o lib/ -c src/",
+    "start": "node_modules/coffee-script/bin/coffee -o lib/ -cw src/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tillleinen/louie"
+  },
+  "author": "Till Leinen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tillleinen/louie/issues"
+  },
+  "homepage": "https://github.com/tillleinen/louie",
+  "devDependencies": {
+    "chai": "^2.2.0",
+    "coffee-script": "1.9.0",
+    "mocha": "^2.2.4"
+  }
+}
