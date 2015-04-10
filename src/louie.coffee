@@ -1,21 +1,30 @@
 class Test
 	constructor: ->
-		@_isRunning = false
 		@_tasks = []
+		@_interval = null
 
 	start: ->
-		@_isRunning = true
+		@_interval = setInterval =>
+			@_processNextTask()
+		, 1000
 
 	stop: ->
-		@_isRunning = false
+		clearInterval(@_interval)
+		@_interval = null
 
 	isRunning: ->
-		@_isRunning
+		!!@_interval
 
 	getTasks: ->
 		@_tasks
 
 	addTask: (task) ->
 		@_tasks.push task
+
+	_processNextTask: ->
+		nextTask = @_tasks.pop()
+		if typeof nextTask.task == 'function'
+			nextTask.task()
+		
 
 module.exports = Test
