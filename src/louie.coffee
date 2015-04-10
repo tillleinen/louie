@@ -6,7 +6,10 @@ class Test
 	start: ->
 		@_timeout = setTimeout =>
 			@_processNextTask()
-			@start()
+			if @_tasks.length > 0
+				@start()
+			else
+				@stop()
 		, @_getNextTimeout()
 
 	stop: ->
@@ -30,6 +33,8 @@ class Test
 	_getNextTimeout: ->
 		nextTask = @_tasks[0]
 		timeout = nextTask.timeout if nextTask
-		timeout || 1000
+		unless typeof timeout == 'undefined'
+			return timeout
+		1000
 
 module.exports = Test

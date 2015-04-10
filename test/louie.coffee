@@ -54,6 +54,18 @@ describe 'Louie', ->
 
             louie.start()
 
+        it 'should stop the loop after the last task has finished', (done) ->
+            louie.addTask
+                timeout: 0
+                task: ->
+
+            louie.start()
+
+            setTimeout ->
+                expect(louie.isRunning()).to.be.false
+                done()
+            , 100
+
         it 'should allow custom timeouts per task', (done) ->
             firstTimeout = 500
             secondTimeout = 100
