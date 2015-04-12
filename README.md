@@ -14,7 +14,7 @@ louie.addTask({
 });
 
 louie.addTask({
-    timeout: 50000,
+    timeout: 5000,
     task: function() {
         console.log('called after 15000ms');
     }
