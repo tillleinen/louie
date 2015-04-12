@@ -1,7 +1,12 @@
 # louie
 
-Louie is a timeable loop for executing tasks written in JavaScript.
+louie is a timeable loop for executing tasks written in JavaScript.
 
+## Installation
+
+```bash
+npm install louie
+```
 
 ## Getting Started
 ```JavaScript
@@ -58,6 +63,13 @@ Stops the loop.
 ```JavaScript
 louie.stop()
 louie.isRunning() // false
+```
+
+## Development
+
+### Tests
+```bash
+npm test
 ```
 
 ## License
