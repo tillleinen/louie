@@ -4,7 +4,7 @@
   "description": "Louie is a timeable infinite loop for executing tasks.",
   "main": "index.js",
   "scripts": {
-    "test": "test",
+    "test": "node_modules/mocha/bin/mocha --compilers coffee:coffee-script/register",
     "prepublish": "node_modules/coffee-script/bin/coffee -o lib/ -c src/",
     "start": "node_modules/coffee-script/bin/coffee -o lib/ -cw src/"
   },
