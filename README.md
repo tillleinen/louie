@@ -67,6 +67,10 @@ louie.isRunning() // false
 
 ## Development
 
+```bash
+npm start # watches and compiles coffeescript
+```
+
 ### Tests
 ```bash
 npm test
