@@ -1,4 +1,4 @@
-class Test
+class Louie
 	constructor: ->
 		@_tasks = []
 		@_timeout = null
@@ -37,4 +37,4 @@ class Test
 			return timeout
 		1000
 
-module.exports = Test
+module.exports = Louie
