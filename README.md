@@ -11,6 +11,7 @@ npm install louie
 ## Getting Started
 ```JavaScript
 var louie = new Louie();
+
 louie.addTask({
     timeout: 10000,
     task: function() {
@@ -42,27 +43,27 @@ louie.addTask({
 ### getTasks()
 Returns an Array of tasks.
 ```JavaScript
-tasks = louie.getTasks()
+var tasks = louie.getTasks();
 ```
 
 ### isRunning()
 Can be used to check if the loop is running.
 ```JavaScript
-louie.isRunning()
+louie.isRunning();
 ```
 
 ### start()
 Starts the loop.
 ```JavaScript
-louie.start()
-louie.isRunning() // true
+louie.start();
+louie.isRunning(); // true
 ```
 
 ### stop()
 Stops the loop.
 ```JavaScript
-louie.stop()
-louie.isRunning() // false
+louie.stop();
+louie.isRunning(); // false
 ```
 
 ## Development
