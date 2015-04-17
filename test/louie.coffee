@@ -1,17 +1,22 @@
+lolex = require("lolex")
 chai = require('chai')
 expect = chai.expect
 assert = require('assert')
 Louie = require('../index.js')
 
+TIME_PRECISION = 50
 
 describe 'Louie', ->
     louie = null
+    clock = null
 
     beforeEach ->
         louie = new Louie()
+        clock = lolex.install()
 
     afterEach ->
         louie.stop()
+        clock.uninstall()
 
     it 'should be a Louie instance', ->
         expect(louie).to.be.an.instanceof Louie
@@ -49,10 +54,11 @@ describe 'Louie', ->
             louie.addTask
                 task: ->
                     expect(Date.now()).to.be
-                        .closeTo(timeExpectedAfterFinishing, 50)
+                        .closeTo(timeExpectedAfterFinishing, TIME_PRECISION)
                     done()
 
             louie.start()
+            clock.tick(1000)
 
         it 'should stop the loop after the last task has finished', (done) ->
             louie.addTask
@@ -65,6 +71,7 @@ describe 'Louie', ->
                 expect(louie.isRunning()).to.be.false
                 done()
             , 100
+            clock.tick(100)
 
         it 'should allow custom timeouts per task', (done) ->
             firstTimeout = 500
@@ -82,23 +89,25 @@ describe 'Louie', ->
                 timeout: firstTimeout
                 task: ->
                     expect(Date.now()).to.be
-                        .closeTo(timeExpectedAfterFinishingFirst, 50)
+                        .closeTo(timeExpectedAfterFinishingFirst, TIME_PRECISION)
 
             louie.addTask
                 timeout: secondTimeout
                 task: ->
                     expect(Date.now()).to.be
-                        .closeTo(timeExpectedAfterFinishingSecond, 50)
+                        .closeTo(timeExpectedAfterFinishingSecond, TIME_PRECISION)
 
             louie.addTask
                 timeout: thirdTimeout
                 task: ->
                     expect(Date.now()).to.be
-                        .closeTo(timeExpectedAfterFinishingThird, 50)
+                        .closeTo(timeExpectedAfterFinishingThird, TIME_PRECISION)
                     done()
 
             tasks = louie.getTasks()
             expect(tasks).to.have.length(3)
 
             louie.start()
-
+            clock.tick(firstTimeout)
+            clock.tick(secondTimeout)
+            clock.tick(thirdTimeout)
