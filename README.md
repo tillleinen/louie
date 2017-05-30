@@ -13,18 +13,12 @@ npm install louie
 var louie = new Louie();
 
 louie.addTask({
-    timeout: 10000,
     task: function() {
         console.log('called after 10000ms');
     }
+    timeout: 4000,
 });
 
-louie.addTask({
-    timeout: 5000,
-    task: function() {
-        console.log('called after 15000ms');
-    }
-});
 
 louie.start();
 ```
