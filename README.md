@@ -2,11 +2,7 @@
 
 louie is a timeable loop for executing tasks written in JavaScript.
 
-## Installation
-
-```bash
-npm install louie
-```
+## Installatio
 
 ## Getting Started
 ```JavaScript
